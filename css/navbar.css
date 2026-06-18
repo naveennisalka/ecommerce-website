@@ -1,0 +1,175 @@
+/* =========================================
+   NEW NAVBAR STYLES (MATCHING UPLOADED DESIGN)
+   ========================================= */
+
+.navbar-wrapper-new {
+  position: fixed;
+  top: 16px;
+  left: 32px;
+  right: 32px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  pointer-events: none; /* Let clicks pass through empty space */
+}
+
+/* Make actual elements clickable */
+.navbar-wrapper-new > * {
+  pointer-events: auto;
+}
+
+/* ── LOGO ── */
+.nav-logo-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.nav-logo-new img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+.nav-logo-new:hover {
+  transform: scale(1.05);
+}
+
+/* ── MENU PILL ── */
+.nav-menu-btn-new {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFEFE6;
+  color: var(--primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+.nav-menu-btn-new:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.nav-menu-btn-new svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── SEARCH BAR CONTAINER ── */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 800px;
+  background: #FAFAFA;
+  border-radius: 50px;
+  padding: 4px;
+  padding-left: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  border: 1px solid #F0F0F0;
+  transition: all 0.3s ease;
+}
+.nav-search-container:focus-within {
+  border-color: #FFEFE6;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(255,107,0,0.08);
+}
+
+/* Search Input */
+.nav-search-input-new {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  min-width: 0;
+}
+.nav-search-input-new::placeholder {
+  color: #BDBDBD;
+}
+
+/* Search Submit Button */
+.nav-search-submit-new {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFEFE6;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.nav-search-submit-new:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.nav-search-submit-new svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── RIGHT ICONS CONTAINER ── */
+.nav-icons-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Circular Icons */
+.nav-icon-circle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #FFEFE6;
+  color: var(--primary);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.nav-icon-circle:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.nav-icon-circle svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* Red dot badge for cart */
+.nav-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  background: #FF2E00;
+  border-radius: 50%;
+  border: 2px solid #FFEFE6;
+}
+
+/* Profile Icon specifically */
+.profile-icon {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
