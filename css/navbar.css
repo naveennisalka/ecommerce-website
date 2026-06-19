@@ -4,15 +4,22 @@
 
 .navbar-wrapper-new {
   position: fixed;
-  top: 16px;
-  left: 32px;
-  right: 32px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  pointer-events: none; /* Let clicks pass through empty space */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 48px;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-top: none;
 }
 
 /* Make actual elements clickable */
@@ -172,4 +179,57 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ── CENTER GROUP ── */
+.nav-center-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* ── PROFILE DROPDOWN ── */
+.nav-profile-dropdown-container {
+  position: relative;
+}
+
+.nav-profile-dropdown {
+  position: absolute;
+  top: calc(100% + 15px);
+  right: 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 8px 0;
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.25s ease;
+  z-index: 1000;
+  border: 1px solid #f0f0f0;
+}
+
+.nav-profile-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #FFEFE6;
+  color: var(--primary);
 }

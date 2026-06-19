@@ -30,8 +30,10 @@
       if (panel) panel.style.display = '';
     });
   });
-  // Activate first tab
-  if (tabBtns[0]) tabBtns[0].click();
+  // Activate first tab only if it has a matching panel (prevents conflicts on user.php)
+  if (tabBtns[0] && document.querySelector(`[data-panel="${tabBtns[0].dataset.tab}"]`)) {
+    tabBtns[0].click();
+  }
 
   // ── LOGOUT ──
   document.querySelectorAll('.logout-btn').forEach(btn => {
@@ -40,7 +42,7 @@
       const fd = new FormData();
       fd.append('action', 'logout');
       await fetch('../api/auth.php', { method: 'POST', body: fd });
-      window.location.href = '../login.php';
+      window.location.href = '../index.php';
     });
   });
 
