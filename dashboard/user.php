@@ -329,15 +329,15 @@ async function removeFromCart(pid, btn) {
     const row = btn.closest('tr');
     const subtotalText = row.children[3].textContent; // Get the text of the Subtotal column
     
-    // Extract numbers from "Rs. 1,500.00"
-    const subtotal = parseFloat(subtotalText.replace(/[^\d.]/g, ''));
+    // Extract numbers properly from "Rs. 1,500.00" by removing "Rs. " and commas
+    const subtotal = parseFloat(subtotalText.replace(/Rs\.?\s*/i, '').replace(/,/g, ''));
     row.remove();
     
     // 2. Update the grand total
     const totalEl = document.getElementById('cart-grand-total');
     if (totalEl) {
-      let currentTotal = parseFloat(totalEl.textContent.replace(/[^\d.]/g, ''));
-      let newTotal = currentTotal - subtotal;
+      let currentTotal = parseFloat(totalEl.textContent.replace(/Rs\.?\s*/i, '').replace(/,/g, ''));
+      let newTotal = Math.max(0, currentTotal - subtotal);
       
       // Format number with commas and 2 decimals
       totalEl.textContent = 'Rs. ' + newTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
