@@ -180,6 +180,7 @@
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.2rem;
+<<<<<<< HEAD
   cursor: pointer;
 }
 
@@ -233,4 +234,7 @@
 .dropdown-item:hover {
   background: #FFEFE6;
   color: var(--primary);
+=======
+  margin-left: 12px;
+>>>>>>> b94d03a71a4df1829957107d48902bebd90eae42
 }

@@ -226,13 +226,13 @@ if ($USE_DB) {
             <td>Rs. <?= number_format($ci['price'],2) ?></td>
             <td><?= $ci['quantity'] ?></td>
             <td style="font-weight:700;color:var(--primary);">Rs. <?= number_format($ci['price']*$ci['quantity'],2) ?></td>
-            <td><button onclick="removeFromCart(<?= $ci['product_id'] ?>)" style="color:#E8001C;background:none;border:none;cursor:pointer;font-size:1.1rem;">✕</button></td>
+            <td><button onclick="removeFromCart(<?= $ci['product_id'] ?>, this)" style="color:#E8001C;background:none;border:none;cursor:pointer;font-size:1.1rem;">✕</button></td>
           </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
       <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);">
-        <span style="font-weight:700;">Total: <span style="color:var(--primary);font-size:1.1rem;">Rs. <?= number_format($cartTotal,2) ?></span></span>
+        <span style="font-weight:700;">Total: <span id="cart-grand-total" style="color:var(--primary);font-size:1.1rem;">Rs. <?= number_format($cartTotal,2) ?></span></span>
         <button class="btn-primary" onclick="checkout()">Proceed to Checkout →</button>
       </div>
     </div>
@@ -303,11 +303,48 @@ window.addEventListener('hashchange', () => {
 });
 
 // Cart helpers
-async function removeFromCart(pid) {
-  const fd=new FormData(); fd.append('action','remove'); fd.append('product_id',pid);
-  const r=await fetch('../api/cart.php',{method:'POST',body:fd});
-  const d=await r.json();
-  if(d.success){showToast('Removed from cart','info');setTimeout(()=>location.reload(),600);}
+async function removeFromCart(pid, btn) {
+  const fd = new FormData(); 
+  fd.append('action', 'remove'); 
+  fd.append('product_id', pid);
+  
+  const r = await fetch('../api/cart.php', { method: 'POST', body: fd });
+  const d = await r.json();
+  
+  if (d.success) {
+    showToast('Removed from cart', 'info');
+    
+    // Update navbar badge if it exists
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+      badge.textContent = d.count;
+      badge.style.display = d.count > 0 ? '' : 'none';
+    }
+    
+    // 1. Remove the row from the table
+    const row = btn.closest('tr');
+    const subtotalText = row.children[3].textContent; // Get the text of the Subtotal column
+    
+    // Extract numbers properly from "Rs. 1,500.00" by removing "Rs. " and commas
+    const subtotal = parseFloat(subtotalText.replace(/Rs\.?\s*/i, '').replace(/,/g, ''));
+    row.remove();
+    
+    // 2. Update the grand total
+    const totalEl = document.getElementById('cart-grand-total');
+    if (totalEl) {
+      let currentTotal = parseFloat(totalEl.textContent.replace(/Rs\.?\s*/i, '').replace(/,/g, ''));
+      let newTotal = Math.max(0, currentTotal - subtotal);
+      
+      // Format number with commas and 2 decimals
+      totalEl.textContent = 'Rs. ' + newTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // 3. Show empty state if cart is now empty
+    const tbody = document.querySelector('#tab-cart tbody');
+    if (tbody && tbody.children.length === 0) {
+      document.getElementById('tab-cart').innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><h3>Cart is empty</h3><p>Add items from the menu to get started.</p></div>';
+    }
+  }
 }
 async function checkout() {
   const addr = prompt('Enter your delivery address:','');
@@ -324,6 +361,11 @@ async function checkout() {
   const or=await fetch('../api/orders.php',{method:'POST',body:fd});
   const od=await or.json();
   if(od.success){
+    // Explicitly clear the cart upon checkout
+    const clrFd = new FormData();
+    clrFd.append('action', 'clear');
+    await fetch('../api/cart.php', { method: 'POST', body: clrFd });
+
     showToast('Order #'+od.order_id+' placed!','success');
     setTimeout(()=>location.reload(),1500);
   } else {
