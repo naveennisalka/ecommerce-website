@@ -165,34 +165,6 @@ function renderCard($p, $wishlist = []) {
     </div>
   </section>
 
-  <!-- ══ BRANDS SECTION ══ -->
-  <section class="container brands-section">
-    <div class="section-header">
-      <h2 class="section-title">Brands</h2>
-      <a href="menu.php" class="see-all-link">See All →</a>
-    </div>
-    <div class="brands-carousel-wrap">
-      <button class="brands-nav-btn brands-prev" aria-label="Previous brands">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div class="brands-carousel" id="brands-carousel">
-        <?php
-        $brandColors = ['#E8001C','#FFC72C','#E4002B','#FF8800','#009639','#006491'];
-        foreach ($DEMO_BRANDS as $i => $brand):
-            $color = $brandColors[$i % count($brandColors)];
-        ?>
-        <div class="brand-pill <?= $i === 0 ? 'active' : '' ?>" data-brand-id="<?= $brand['id'] ?>">
-          <div class="brand-logo" style="background:<?= $color ?>;"><?= htmlspecialchars($brand['icon']) ?></div>
-          <span class="brand-name"><?= htmlspecialchars($brand['name']) ?></span>
-        </div>
-        <?php endforeach; ?>
-      </div>
-      <button class="brands-nav-btn brands-next" aria-label="Next brands">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-    </div>
-  </section>
-
   <!-- ══ SHOP BY CATEGORY ══ -->
   <section class="container section-sm">
     <div class="section-header">
