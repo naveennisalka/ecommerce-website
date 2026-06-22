@@ -16,6 +16,7 @@ $brandColors = ['#E8001C','#FFC72C','#E4002B','#FF8800','#009639','#006491'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="images/logo2.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu — EatLink | Browse All Food Items</title>
@@ -49,7 +50,7 @@ $brandColors = ['#E8001C','#FFC72C','#E4002B','#FF8800','#009639','#006491'];
       </svg>
       Filters
     </h3>
-    <button class="filter-close-btn" id="filter-close-btn" aria-label="Close filter">✕</button>
+    <button class="filter-close-btn" id="filter-close-btn" aria-label="Close filter"><span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">close</span></button>
   </div>
 
   <!-- BODY -->

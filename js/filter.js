@@ -155,14 +155,14 @@
       tag.innerHTML = `
         <span class="filter-tag-icon">${icon}</span>
         <span>${label}</span>
-        <button class="filter-tag-remove" title="Remove">✕</button>
+        <button class="filter-tag-remove" title="Remove"><span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">close</span></button>
       `;
       tag.querySelector('.filter-tag-remove').addEventListener('click', removeFn);
       filterTagsWrap.appendChild(tag);
     }
 
     filters.brands.forEach(bid => {
-      makeTag(BRAND_NAMES[bid] || 'Brand', '🏪', () => {
+      makeTag(BRAND_NAMES[bid] || 'Brand', '<span class="material-symbols-outlined">storefront</span>', () => {
         filters.brands = filters.brands.filter(b => b !== bid);
         const cb = document.querySelector(`.brand-filter-cb[value="${bid}"]`);
         if (cb) { cb.checked = false; cb.closest('.brand-filter-item')?.classList.remove('selected'); }
@@ -294,7 +294,7 @@
     if (products.length === 0) {
       productsGrid.innerHTML = `
         <div style="grid-column:1/-1" class="empty-state">
-          <div class="empty-icon">🍽️</div>
+          <div class="empty-icon"><span class="material-symbols-outlined">restaurant</span></div>
           <h3>No items found</h3>
           <p>Try adjusting your filters</p>
         </div>`;

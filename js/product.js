@@ -64,7 +64,7 @@
       })
       .finally(() => {
         addCartBtn.disabled = false;
-        addCartBtn.innerHTML = '🛒 Add to Cart';
+        addCartBtn.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span> Add to Cart';
       });
   });
 
@@ -91,7 +91,7 @@
       .then(d => {
         if (d.success) {
           wishBtn.classList.toggle('wishlisted', d.wishlisted);
-          window.showToast && window.showToast(d.wishlisted ? 'Added to wishlist ❤️' : 'Removed from wishlist', 'info');
+          window.showToast && window.showToast(d.wishlisted ? 'Added to wishlist <span class="material-symbols-outlined">favorite</span>' : 'Removed from wishlist', 'info');
         }
       });
   });

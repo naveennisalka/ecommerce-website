@@ -77,7 +77,7 @@ switch ($action) {
             $owner = $ownerQ->fetch();
             if ($owner) {
                 createNotification($pdo,$owner['owner_id'],
-                    "🛒 New Order #$orderId",
+                    "<span class="material-symbols-outlined">shopping_cart</span> New Order #$orderId",
                     "A new order was placed by {$user['name']} for Rs. ".number_format($total,2),
                     'order', $orderId);
             }
@@ -141,12 +141,12 @@ switch ($action) {
 
         // Notify customer
         $msgs = [
-            'confirmed'  => "✅ Your order #{$orderId} has been confirmed by the shop!",
+            'confirmed'  => "<span class="material-symbols-outlined">check_circle</span> Your order #{$orderId} has been confirmed by the shop!",
             'preparing'  => "👨‍🍳 Your order #{$orderId} is being prepared.",
-            'picked_up'  => "📦 Your order #{$orderId} has been picked up by the delivery rider.",
-            'on_the_way' => "🛵 Your order #{$orderId} is on the way to you!",
+            'picked_up'  => "<span class="material-symbols-outlined">inventory_2</span> Your order #{$orderId} has been picked up by the delivery rider.",
+            'on_the_way' => "<span class="material-symbols-outlined">two_wheeler</span> Your order #{$orderId} is on the way to you!",
             'delivered'  => "🎉 Your order #{$orderId} has been delivered. Enjoy your meal!",
-            'cancelled'  => "❌ Your order #{$orderId} was cancelled.",
+            'cancelled'  => "<span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">error</span> Your order #{$orderId} was cancelled.",
         ];
         $title = ucfirst(str_replace('_',' ',$newStatus));
         createNotification($pdo,$order['user_id'],"Order $title",$msgs[$newStatus]??$note,'order',$orderId);
@@ -156,7 +156,7 @@ switch ($action) {
             $ownerQ = $pdo->prepare("SELECT owner_id FROM shops WHERE id=?");
             $ownerQ->execute([$order['shop_id']]);
             $owner = $ownerQ->fetch();
-            if ($owner) createNotification($pdo,$owner['owner_id'],"✅ Order #{$orderId} Delivered","Order #$orderId was successfully delivered.",'order',$orderId);
+            if ($owner) createNotification($pdo,$owner['owner_id'],"<span class="material-symbols-outlined">check_circle</span> Order #{$orderId} Delivered","Order #$orderId was successfully delivered.",'order',$orderId);
         }
 
         jsonResponse(['success'=>true,'message'=>"Status updated to $newStatus"]);
@@ -211,13 +211,13 @@ switch ($action) {
 
         // Notify delivery man
         createNotification($pdo,$deliveryManId,
-            "📦 New Delivery Assignment",
+            "<span class="material-symbols-outlined">inventory_2</span> New Delivery Assignment",
             "You have been assigned to deliver order #{$orderId} from {$order['shop_name']}. Pickup: {$order['shop_address']}",
             'delivery',$orderId);
 
         // Notify customer
         createNotification($pdo,$order['user_id'],
-            "✅ Order #{$orderId} Confirmed",
+            "<span class="material-symbols-outlined">check_circle</span> Order #{$orderId} Confirmed",
             "Your order has been confirmed and a delivery rider has been assigned!",
             'order',$orderId);
 

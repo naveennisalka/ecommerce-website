@@ -48,6 +48,7 @@ if ($USE_DB) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="../images/logo2.png">
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account — EatLink</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,25 +78,25 @@ if ($USE_DB) {
     <div class="sidebar-nav-section">
       <div class="sidebar-nav-label">Account</div>
       <a class="sidebar-nav-item active" data-tab="orders" href="#" onclick="switchTab('orders');return false;">
-        <span class="sidebar-nav-icon">📦</span> My Orders
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">inventory_2</span></span> My Orders
         <?php if (count($orders)): ?><span class="sidebar-badge"><?= count($orders) ?></span><?php endif; ?>
       </a>
       <a class="sidebar-nav-item" data-tab="wishlist" href="#" onclick="switchTab('wishlist');return false;">
-        <span class="sidebar-nav-icon">❤️</span> Wishlist
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">favorite</span></span> Wishlist
         <?php if (count($wishlistItems)): ?><span class="sidebar-badge"><?= count($wishlistItems) ?></span><?php endif; ?>
       </a>
       <a class="sidebar-nav-item" data-tab="cart" href="#" onclick="switchTab('cart');return false;">
-        <span class="sidebar-nav-icon">🛒</span> Cart
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">shopping_cart</span></span> Cart
         <?php if (count($cartItems)): ?><span class="sidebar-badge"><?= count($cartItems) ?></span><?php endif; ?>
       </a>
       <a class="sidebar-nav-item" data-tab="notifications" href="#" onclick="switchTab('notifications');return false;">
-        <span class="sidebar-nav-icon">🔔</span> Notifications
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">notifications</span></span> Notifications
         <?php if ($unread): ?><span class="sidebar-badge" id="notif-sidebar-badge"><?= $unread ?></span><?php endif; ?>
       </a>
     </div>
   </nav>
   <div class="sidebar-bottom">
-    <button class="sidebar-logout logout-btn">🚪 Logout</button>
+    <button class="sidebar-logout logout-btn"><span class="material-symbols-outlined">logout</span> Logout</button>
   </div>
 </aside>
 
@@ -115,7 +116,7 @@ if ($USE_DB) {
   <div id="tab-orders" class="tab-panel">
     <?php if (empty($orders)): ?>
     <div class="empty-state">
-      <div class="empty-icon">📦</div>
+      <div class="empty-icon"><span class="material-symbols-outlined">inventory_2</span></div>
       <h3>No orders yet</h3>
       <p>Start ordering delicious food from our menu!</p>
       <a href="../menu.php" class="btn-primary" style="margin-top:16px;display:inline-flex;">Browse Menu</a>
@@ -137,7 +138,7 @@ if ($USE_DB) {
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
           <?php if ($order['status'] === 'pending'): ?>
-          <button onclick="cancelOrder(<?= $order['id'] ?>)" style="background:#FFF0F0;color:#E8001C;border:1px solid #FADADD;border-radius:6px;padding:4px 8px;font-size:.75rem;font-weight:600;cursor:pointer;">✕ Cancel</button>
+          <button onclick="cancelOrder(<?= $order['id'] ?>)" style="background:#FFF0F0;color:#E8001C;border:1px solid #FADADD;border-radius:6px;padding:4px 8px;font-size:.75rem;font-weight:600;cursor:pointer;"><span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">close</span> Cancel</button>
           <?php endif; ?>
           <span class="status-pill <?= $order['status'] ?>"><?= ucfirst(str_replace('_',' ',$order['status'])) ?></span>
           <span style="font-size:.875rem;font-weight:700;color:var(--primary);">Rs. <?= number_format($order['total_amount'],2) ?></span>
@@ -150,7 +151,7 @@ if ($USE_DB) {
             $active = $si === $curStep;
         ?>
         <div class="step-item <?= $done?'done':'' ?> <?= $active?'active':'' ?>">
-          <div class="step-dot"><?= $done ? '✓' : ($si+1) ?></div>
+          <div class="step-dot"><?= $done ? '<span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">check</span>' : ($si+1) ?></div>
           <div class="step-label"><?= $stepLabels[$si] ?></div>
         </div>
         <?php endforeach; ?>
@@ -166,7 +167,7 @@ if ($USE_DB) {
       </div>
       <?php if ($order['status']==='delivered'): ?>
       <div style="margin-top:12px;">
-        <a href="../product.php?id=<?= $order['items'][0]['product_id']??1 ?>#reviews" class="btn-outline" style="font-size:.8rem;padding:6px 14px;">⭐ Write Review</a>
+        <a href="../product.php?id=<?= $order['items'][0]['product_id']??1 ?>#reviews" class="btn-outline" style="font-size:.8rem;padding:6px 14px;"><span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">star</span> Write Review</a>
       </div>
       <?php endif; ?>
     </div>
@@ -177,7 +178,7 @@ if ($USE_DB) {
   <!-- ══ WISHLIST TAB ══ -->
   <div id="tab-wishlist" class="tab-panel" style="display:none;">
     <?php if (empty($wishlistItems)): ?>
-    <div class="empty-state"><div class="empty-icon">❤️</div><h3>Wishlist is empty</h3><p>Heart items you love to save them here.</p></div>
+    <div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">favorite</span></div><h3>Wishlist is empty</h3><p>Heart items you love to save them here.</p></div>
     <?php else: ?>
     <div class="products-grid">
       <?php foreach ($wishlistItems as $wi):
@@ -208,7 +209,7 @@ if ($USE_DB) {
   <!-- ══ CART TAB ══ -->
   <div id="tab-cart" class="tab-panel" style="display:none;">
     <?php if (empty($cartItems)): ?>
-    <div class="empty-state"><div class="empty-icon">🛒</div><h3>Cart is empty</h3><p>Add items from the menu to get started.</p></div>
+    <div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">shopping_cart</span></div><h3>Cart is empty</h3><p>Add items from the menu to get started.</p></div>
     <?php else: ?>
     <div class="data-table-wrap">
       <div class="data-table-head"><h3>Cart Items</h3></div>
@@ -226,7 +227,7 @@ if ($USE_DB) {
             <td>Rs. <?= number_format($ci['price'],2) ?></td>
             <td><?= $ci['quantity'] ?></td>
             <td style="font-weight:700;color:var(--primary);">Rs. <?= number_format($ci['price']*$ci['quantity'],2) ?></td>
-            <td><button onclick="removeFromCart(<?= $ci['product_id'] ?>, this)" style="color:#E8001C;background:none;border:none;cursor:pointer;font-size:1.1rem;">✕</button></td>
+            <td><button onclick="removeFromCart(<?= $ci['product_id'] ?>, this)" style="color:#E8001C;background:none;border:none;cursor:pointer;font-size:1.1rem;"><span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">close</span></button></td>
           </tr>
           <?php endforeach; ?>
         </tbody>
@@ -248,13 +249,13 @@ if ($USE_DB) {
       <?php endif; ?>
     </div>
     <?php if (empty($notifs)): ?>
-    <div class="empty-state"><div class="empty-icon">🔔</div><h3>No notifications</h3><p>You're all caught up!</p></div>
+    <div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">notifications</span></div><h3>No notifications</h3><p>You're all caught up!</p></div>
     <?php else: ?>
     <div class="notif-list">
       <?php foreach ($notifs as $notif): ?>
       <div class="notif-item <?= $notif['is_read']?'':'unread' ?>" data-id="<?= $notif['id'] ?>">
         <div class="notif-icon <?= $notif['type'] ?>">
-          <?= $notif['type']==='order'?'📦':($notif['type']==='delivery'?'🛵':'🔔') ?>
+          <?= $notif['type']==='order'?'<span class="material-symbols-outlined">inventory_2</span>':($notif['type']==='delivery'?'<span class="material-symbols-outlined">two_wheeler</span>':'<span class="material-symbols-outlined">notifications</span>') ?>
         </div>
         <div class="notif-body">
           <div class="notif-title"><?= htmlspecialchars($notif['title']) ?></div>
@@ -342,7 +343,7 @@ async function removeFromCart(pid, btn) {
     // 3. Show empty state if cart is now empty
     const tbody = document.querySelector('#tab-cart tbody');
     if (tbody && tbody.children.length === 0) {
-      document.getElementById('tab-cart').innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><h3>Cart is empty</h3><p>Add items from the menu to get started.</p></div>';
+      document.getElementById('tab-cart').innerHTML = '<div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">shopping_cart</span></div><h3>Cart is empty</h3><p>Add items from the menu to get started.</p></div>';
     }
   }
 }

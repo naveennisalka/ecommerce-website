@@ -95,6 +95,7 @@ function renderCard($p, $wishlist=[]): string {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="images/logo2.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($product['name']) ?> — EatLink</title>
@@ -176,7 +177,7 @@ function renderCard($p, $wishlist=[]): string {
 
       <!-- DELIVERY -->
       <div class="product-delivery-badge">
-        <?= ($product['delivery_type']??'free')==='free' ? '🛵 Free Delivery' : '💳 Paid Delivery' ?>
+        <?= ($product['delivery_type']??'free')==='free' ? '<span class="material-symbols-outlined">two_wheeler</span> Free Delivery' : '💳 Paid Delivery' ?>
       </div>
 
       <!-- DESCRIPTION -->
@@ -196,17 +197,20 @@ function renderCard($p, $wishlist=[]): string {
 
       <!-- ACTION BUTTONS -->
       <div class="product-actions">
-        <button class="btn-buy-now" id="product-buy-now">⚡ Buy Now</button>
-        <button class="btn-add-cart-lg" id="product-add-cart">🛒 Add to Cart</button>
+        <button class="btn-buy-now" id="product-buy-now"><span class="material-symbols-outlined" style="font-size:1.2rem;vertical-align:middle;margin-right:4px;">bolt</span> Buy Now</button>
+        <button class="btn-add-cart-lg" id="product-add-cart"><span class="material-symbols-outlined" style="font-size:1.2rem;vertical-align:middle;margin-right:4px;">shopping_cart</span> Add to Cart</button>
       </div>
 
       <!-- SHOP INFO -->
       <?php if (!empty($product['shop_name'])): ?>
-      <div style="margin-top:20px;padding:14px;background:var(--primary-ultra);border-radius:12px;font-size:.82rem;color:var(--text-muted);">
-        🏪 <strong style="color:var(--text-dark);"><?= htmlspecialchars($product['shop_name']) ?></strong>
-        <?php if (!empty($product['brand_name'])): ?>
-        &nbsp;·&nbsp; <?= htmlspecialchars($product['brand_name']) ?>
-        <?php endif; ?>
+      <div style="margin-top:20px;padding:14px;background:var(--primary-ultra);border-radius:12px;font-size:.82rem;color:var(--text-muted);display:flex;align-items:center;gap:8px;">
+        <span class="material-symbols-outlined" style="font-size:1.2rem;color:var(--primary);">storefront</span>
+        <div>
+          <strong style="color:var(--text-dark);"><?= htmlspecialchars($product['shop_name']) ?></strong>
+          <?php if (!empty($product['brand_name'])): ?>
+          <span style="opacity:0.8;">&nbsp;·&nbsp; <?= htmlspecialchars($product['brand_name']) ?></span>
+          <?php endif; ?>
+        </div>
       </div>
       <?php endif; ?>
     </div>

@@ -47,6 +47,7 @@ function renderCard($p, $wishlist = []) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="images/logo2.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EatLink — Order Food Online</title>
@@ -167,21 +168,7 @@ function renderCard($p, $wishlist = []) {
 
 
 
-  <!-- ══ SHOP BY CATEGORY ══ -->
-  <section class="container section-sm">
-    <div class="section-header">
-      <h2 class="section-title">Shop by Category</h2>
-      <a href="menu.php" class="see-all-link">See All →</a>
-    </div>
-    <div class="categories-grid" id="categories-grid">
-      <?php foreach ($DEMO_CATEGORIES as $cat): ?>
-      <a href="menu.php?category=<?= $cat['id'] ?>" class="category-item">
-        <div class="category-icon"><?= htmlspecialchars($cat['icon']) ?></div>
-        <span class="category-label"><?= htmlspecialchars($cat['name']) ?></span>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </section>
+
 
   <!-- ══ AD BANNER ══ -->
   <section class="container section-sm">

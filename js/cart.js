@@ -17,8 +17,8 @@
     }
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    const icons = { success: '✅', error: '❌', info: '🛒' };
-    toast.innerHTML = `<span>${icons[type] || '🔔'}</span><span>${msg}</span>`;
+    const icons = { success: '<span class="material-symbols-outlined">check_circle</span>', error: '<span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">error</span>', info: '<span class="material-symbols-outlined">shopping_cart</span>' };
+    toast.innerHTML = `<span>${icons[type] || '<span class="material-symbols-outlined">notifications</span>'}</span><span>${msg}</span>`;
     container.appendChild(toast);
     setTimeout(() => {
       toast.style.animation = 'toastOut 0.35s ease forwards';

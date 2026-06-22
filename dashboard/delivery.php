@@ -37,6 +37,7 @@ if ($USE_DB) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="../images/logo2.png">
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Delivery Dashboard — EatLink</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,20 +64,20 @@ if ($USE_DB) {
   <nav class="sidebar-nav">
     <div class="sidebar-nav-section">
       <a class="sidebar-nav-item" data-tab="active" href="#" onclick="switchTab('active');return false;">
-        <span class="sidebar-nav-icon">🛵</span> Active Deliveries
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">two_wheeler</span></span> Active Deliveries
         <?php if ($pendingCount): ?><span class="sidebar-badge"><?= $pendingCount ?></span><?php endif; ?>
       </a>
       <a class="sidebar-nav-item" data-tab="history" href="#" onclick="switchTab('history');return false;">
-        <span class="sidebar-nav-icon">📋</span> Delivery History
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">assignment</span></span> Delivery History
       </a>
       <a class="sidebar-nav-item" data-tab="notifications" href="#" onclick="switchTab('notifications');return false;">
-        <span class="sidebar-nav-icon">🔔</span> Notifications
+        <span class="sidebar-nav-icon"><span class="material-symbols-outlined">notifications</span></span> Notifications
         <?php if ($unread): ?><span class="sidebar-badge" id="notif-sidebar-badge"><?= $unread ?></span><?php endif; ?>
       </a>
     </div>
   </nav>
   <div class="sidebar-bottom">
-    <button class="sidebar-logout logout-btn">🚪 Logout</button>
+    <button class="sidebar-logout logout-btn"><span class="material-symbols-outlined">logout</span> Logout</button>
   </div>
 </aside>
 
@@ -90,17 +91,17 @@ if ($USE_DB) {
     <!-- STATS -->
     <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="stat-card">
-        <div class="stat-card-top"><div class="stat-icon orange">🛵</div></div>
+        <div class="stat-card-top"><div class="stat-icon orange"><span class="material-symbols-outlined">two_wheeler</span></div></div>
         <div class="stat-value"><?= $pendingCount ?></div>
         <div class="stat-label">Active Deliveries</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-top"><div class="stat-icon green">✅</div></div>
+        <div class="stat-card-top"><div class="stat-icon green"><span class="material-symbols-outlined">check_circle</span></div></div>
         <div class="stat-value"><?= $completedCount ?></div>
         <div class="stat-label">Completed</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-top"><div class="stat-icon blue">📦</div></div>
+        <div class="stat-card-top"><div class="stat-icon blue"><span class="material-symbols-outlined">inventory_2</span></div></div>
         <div class="stat-value"><?= count($assignments) ?></div>
         <div class="stat-label">Total Assignments</div>
       </div>
@@ -110,7 +111,7 @@ if ($USE_DB) {
     <div id="tab-active" class="tab-panel">
       <?php $activeOrders = array_filter($assignments,fn($a)=>in_array($a['da_status']??$a['status'],['confirmed','preparing','assigned','accepted','picked_up','on_the_way']));
       if (empty($activeOrders)): ?>
-      <div class="empty-state"><div class="empty-icon">🛵</div><h3>No active deliveries</h3><p>You're all done! New assignments will appear here.</p></div>
+      <div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">two_wheeler</span></div><h3>No active deliveries</h3><p>You're all done! New assignments will appear here.</p></div>
       <?php else: ?>
       <?php foreach ($activeOrders as $a):
           $daStatus = $a['da_status'] ?? $a['status'];
@@ -125,22 +126,22 @@ if ($USE_DB) {
         <div class="delivery-card-body">
           <div class="delivery-info-grid">
             <div class="delivery-info-item">
-              <div class="d-label">📍 Pickup Location</div>
+              <div class="d-label"><span class="material-symbols-outlined">location_on</span> Pickup Location</div>
               <div class="d-value"><?= htmlspecialchars($a['pickup_address'] ?? $a['shop_address']) ?></div>
               <?php if (!empty($a['shop_phone'])): ?>
-              <div style="font-size:.78rem;color:var(--primary);margin-top:4px;">📞 <?= htmlspecialchars($a['shop_phone']) ?></div>
+              <div style="font-size:.78rem;color:var(--primary);margin-top:4px;"><span class="material-symbols-outlined">call</span> <?= htmlspecialchars($a['shop_phone']) ?></div>
               <?php endif; ?>
             </div>
             <div class="delivery-info-item">
-              <div class="d-label">🏠 Drop Location</div>
+              <div class="d-label"><span class="material-symbols-outlined">home</span> Drop Location</div>
               <div class="d-value"><?= htmlspecialchars($a['drop_address'] ?? $a['delivery_address']) ?></div>
             </div>
             <div class="delivery-info-item">
-              <div class="d-label">👤 Customer</div>
+              <div class="d-label"><span class="material-symbols-outlined">person</span> Customer</div>
               <div class="d-value"><?= htmlspecialchars($a['customer_name']) ?></div>
               <div style="font-size:.78rem;color:var(--primary);margin-top:4px;">
                 <a href="tel:<?= htmlspecialchars($a['cust_phone']??$a['customer_phone']??'') ?>" style="color:var(--primary);text-decoration:none;">
-                  📞 <?= htmlspecialchars($a['cust_phone']??$a['customer_phone']??'—') ?>
+                  <span class="material-symbols-outlined">call</span> <?= htmlspecialchars($a['cust_phone']??$a['customer_phone']??'—') ?>
                 </a>
               </div>
             </div>
@@ -155,7 +156,7 @@ if ($USE_DB) {
             </div>
             <?php endif; ?>
             <div class="delivery-info-item">
-              <div class="d-label">📦 Items</div>
+              <div class="d-label"><span class="material-symbols-outlined">inventory_2</span> Items</div>
               <div style="font-size:.8rem;color:var(--text-medium);">
                 <?php foreach ($a['items']??[] as $item): ?>
                 <?= htmlspecialchars($item['name']) ?> ×<?= $item['quantity'] ?><br>
@@ -167,11 +168,11 @@ if ($USE_DB) {
           <!-- ACTION BUTTONS -->
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
             <?php if (in_array($daStatus, ['confirmed', 'preparing', 'assigned'])): ?>
-            <button onclick="updateOrderStatus(<?= $a['id'] ?>,'picked_up','Package picked up by delivery man')" class="btn-primary" style="flex:1;">📦 Mark Picked Up</button>
+            <button onclick="updateOrderStatus(<?= $a['id'] ?>,'picked_up','Package picked up by delivery man')" class="btn-primary" style="flex:1;"><span class="material-symbols-outlined">inventory_2</span> Mark Picked Up</button>
             <?php elseif ($daStatus==='picked_up'): ?>
-            <button onclick="openPinModal(<?= $a['id'] ?>)" class="btn-primary" style="flex:1;">✅ Confirm Order</button>
+            <button onclick="openPinModal(<?= $a['id'] ?>)" class="btn-primary" style="flex:1;"><span class="material-symbols-outlined">check_circle</span> Confirm Order</button>
             <?php endif; ?>
-            <a href="tel:<?= htmlspecialchars($a['cust_phone']??'') ?>" class="btn-outline" style="flex:0;white-space:nowrap;">📞 Call Customer</a>
+            <a href="tel:<?= htmlspecialchars($a['cust_phone']??'') ?>" class="btn-outline" style="flex:0;white-space:nowrap;"><span class="material-symbols-outlined">call</span> Call Customer</a>
           </div>
         </div>
       </div>
@@ -183,7 +184,7 @@ if ($USE_DB) {
     <div id="tab-history" class="tab-panel" style="display:none;">
       <?php $done = array_filter($assignments,fn($a)=>in_array($a['da_status']??$a['status'],['delivered','returned']));
       if (empty($done)): ?>
-      <div class="empty-state"><div class="empty-icon">📋</div><h3>No completed deliveries yet</h3></div>
+      <div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">assignment</span></div><h3>No completed deliveries yet</h3></div>
       <?php else: ?>
       <div class="data-table-wrap">
         <table class="data-table">
@@ -213,12 +214,12 @@ if ($USE_DB) {
         <?php if ($unread): ?><button id="mark-all-read" class="btn-outline" style="font-size:.8rem;padding:6px 14px;">Mark all read</button><?php endif; ?>
       </div>
       <?php if (empty($notifs)): ?>
-      <div class="empty-state"><div class="empty-icon">🔔</div><h3>No notifications</h3></div>
+      <div class="empty-state"><div class="empty-icon"><span class="material-symbols-outlined">notifications</span></div><h3>No notifications</h3></div>
       <?php else: ?>
       <div class="notif-list">
         <?php foreach ($notifs as $n): ?>
         <div class="notif-item <?= $n['is_read']?'':'unread' ?>" data-id="<?= $n['id'] ?>">
-          <div class="notif-icon delivery">🛵</div>
+          <div class="notif-icon delivery"><span class="material-symbols-outlined">two_wheeler</span></div>
           <div class="notif-body">
             <div class="notif-title"><?= htmlspecialchars($n['title']) ?></div>
             <div class="notif-msg"><?= htmlspecialchars($n['message']) ?></div>

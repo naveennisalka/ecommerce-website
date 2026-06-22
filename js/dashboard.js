@@ -94,7 +94,7 @@
             <div class="dm-avatar">${dm.name.charAt(0)}</div>
             <div>
               <div class="dm-name">${dm.name}</div>
-              <div class="dm-phone">📞 ${dm.phone}</div>
+              <div class="dm-phone"><span class="material-symbols-outlined">call</span> ${dm.phone}</div>
             </div>
           </div>`).join('');
       });
@@ -128,8 +128,8 @@
     if (!c) { c = document.createElement('div'); c.id = 'toast-container'; document.body.appendChild(c); }
     const t = document.createElement('div');
     t.className = `toast ${type}`;
-    const icons = { success:'✅', error:'❌', info:'ℹ️' };
-    t.innerHTML = `<span>${icons[type]||'🔔'}</span><span>${msg}</span>`;
+    const icons = { success:'<span class="material-symbols-outlined">check_circle</span>', error:'<span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">error</span>', info:'ℹ️' };
+    t.innerHTML = `<span>${icons[type]||'<span class="material-symbols-outlined">notifications</span>'}</span><span>${msg}</span>`;
     c.appendChild(t);
     setTimeout(() => { t.style.animation='toastOut .35s ease forwards'; setTimeout(()=>t.remove(),350); }, 2800);
   };
