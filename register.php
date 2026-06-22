@@ -26,9 +26,8 @@ if (!empty($_SESSION['user'])) {
 <div class="auth-card" style="max-width:520px;">
 
   <!-- LOGO -->
-  <a href="index.php" class="auth-logo">
-    <div class="auth-logo-icon">🍔</div>
-    <div class="auth-logo-text">Eat<span>Link</span></div>
+  <a href="index.php" class="auth-logo" style="display:flex;justify-content:center;margin-bottom:20px;">
+    <img src="images/Logo.png" alt="EatLink Logo" style="max-height: 40px; max-width: 100%;">
   </a>
 
   <h1 class="auth-heading">Create Account</h1>

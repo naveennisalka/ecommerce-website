@@ -6,6 +6,7 @@
   'use strict';
 
   const POLL_INTERVAL = 30000; // 30 seconds
+  const apiBase = window.location.pathname.includes('/dashboard/') ? '../api/' : 'api/';
 
   function updateBadge(count) {
     document.querySelectorAll('.notif-badge-count').forEach(el => {
@@ -21,7 +22,7 @@
   }
 
   function pollUnread() {
-    fetch('api/notifications.php?action=unread_count')
+    fetch(apiBase + 'notifications.php?action=unread_count')
       .then(r => r.json())
       .then(d => { if (d.success) updateBadge(d.count); })
       .catch(() => {});
@@ -35,7 +36,7 @@
   document.getElementById('mark-all-read')?.addEventListener('click', async () => {
     const fd = new FormData();
     fd.append('action', 'mark_read');
-    await fetch('api/notifications.php', { method: 'POST', body: fd });
+    await fetch(apiBase + 'notifications.php', { method: 'POST', body: fd });
     updateBadge(0);
     document.querySelectorAll('.notif-item.unread').forEach(n => n.classList.remove('unread'));
   });
@@ -47,7 +48,7 @@
       const fd = new FormData();
       fd.append('action', 'mark_read');
       fd.append('id', item.dataset.id);
-      fetch('api/notifications.php', { method: 'POST', body: fd });
+      fetch(apiBase + 'notifications.php', { method: 'POST', body: fd });
       item.classList.remove('unread');
     });
   });

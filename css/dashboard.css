@@ -148,7 +148,7 @@ body.dashboard-body {
   background: var(--white);
   border-bottom: 1px solid var(--border);
   padding: 0 32px;
-  height: 64px;
+  height: 72px;
   display: flex; align-items: center; justify-content: space-between;
   position: sticky; top: 0; z-index: 100;
 }
@@ -271,7 +271,8 @@ table.data-table tr:hover td { background: var(--primary-ultra); }
   border: 1px solid var(--border-light);
   border-radius: var(--card-radius);
   padding: 24px;
-  margin-bottom: 16px;
+  margin: 0 auto 16px auto;
+  max-width: 800px;
 }
 .order-track-header {
   display: flex; align-items: center; justify-content: space-between;
@@ -407,6 +408,7 @@ table.data-table tr:hover td { background: var(--primary-ultra); }
 .upload-area span { color: var(--primary); font-weight: 600; }
 
 /* ── NOTIFICATION LIST ── */
+#tab-notifications { max-width: 800px; margin: 0 auto; }
 .notif-list { display: flex; flex-direction: column; gap: 8px; }
 .notif-item {
   display: flex; align-items: flex-start; gap: 12px;

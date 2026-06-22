@@ -23,14 +23,14 @@ function renderCard($p, $wishlist = []) {
         ? '<span class="price-original">Rs. '.number_format($p['original_price']).'</span>' : '';
 
     return '
-    <div class="product-card" data-product-id="'.$p['id'].'" data-product-name="'.htmlspecialchars($p['name']).'" onclick="window.location=\'product.php?id='.$p['id'].'\'" style="cursor:pointer;">
+    <div class="product-card" data-product-id="'.$p['id'].'" data-product-name="'.htmlspecialchars($p['name']).'" onclick="if(!event.target.closest(\'.product-heart, .add-to-cart-btn\')) window.location=\'product.php?id='.$p['id'].'\'" style="cursor:pointer;">
       <div class="product-card-image-wrap">
         '.$discountHtml.'
-        <button class="product-heart '.$wishlisted.'" data-product-id="'.$p['id'].'" title="Add to wishlist" aria-label="Wishlist" onclick="event.stopPropagation()">
+        <button class="product-heart '.$wishlisted.'" data-product-id="'.$p['id'].'" title="Add to wishlist" aria-label="Wishlist">
           <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
         <img src="'.$img.'" alt="'.htmlspecialchars($p['name']).'" loading="lazy">
-        <button class="add-to-cart-btn" title="Add to cart" aria-label="Add to cart" onclick="event.stopPropagation()">
+        <button class="add-to-cart-btn" title="Add to cart" aria-label="Add to cart">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6" stroke="#fff" stroke-width="1.5"/><path d="M16 10a4 4 0 01-8 0" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
         </button>
       </div>
@@ -129,21 +129,21 @@ function renderCard($p, $wishlist = []) {
   <section class="container section-sm">
     <div class="info-strip">
       <div class="info-card">
-        <div class="info-card-icon">🚴</div>
+        <div class="info-card-icon"><span class="material-symbols-outlined" style="font-size:inherit;">two_wheeler</span></div>
         <div class="info-card-text">
           <h4>Fast Delivery</h4>
           <p>Get your order delivered in 30 minutes or less, guaranteed</p>
         </div>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">🎧</div>
+        <div class="info-card-icon"><span class="material-symbols-outlined" style="font-size:inherit;">support_agent</span></div>
         <div class="info-card-text">
           <h4>24/7 Support</h4>
           <p>Our customer support team is always available to help you</p>
         </div>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">✅</div>
+        <div class="info-card-icon"><span class="material-symbols-outlined" style="font-size:inherit;">verified</span></div>
         <div class="info-card-text">
           <h4>Quality Food</h4>
           <p>Fresh ingredients sourced from the best local suppliers</p>
@@ -165,49 +165,8 @@ function renderCard($p, $wishlist = []) {
     </div>
   </section>
 
-  <!-- ══ BRANDS SECTION ══ -->
-  <section class="container brands-section">
-    <div class="section-header">
-      <h2 class="section-title">Brands</h2>
-      <a href="menu.php" class="see-all-link">See All →</a>
-    </div>
-    <div class="brands-carousel-wrap">
-      <button class="brands-nav-btn brands-prev" aria-label="Previous brands">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div class="brands-carousel" id="brands-carousel">
-        <?php
-        $brandColors = ['#E8001C','#FFC72C','#E4002B','#FF8800','#009639','#006491'];
-        foreach ($DEMO_BRANDS as $i => $brand):
-            $color = $brandColors[$i % count($brandColors)];
-        ?>
-        <div class="brand-pill <?= $i === 0 ? 'active' : '' ?>" data-brand-id="<?= $brand['id'] ?>">
-          <div class="brand-logo" style="background:<?= $color ?>;"><?= htmlspecialchars($brand['icon']) ?></div>
-          <span class="brand-name"><?= htmlspecialchars($brand['name']) ?></span>
-        </div>
-        <?php endforeach; ?>
-      </div>
-      <button class="brands-nav-btn brands-next" aria-label="Next brands">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-    </div>
-  </section>
 
-  <!-- ══ SHOP BY CATEGORY ══ -->
-  <section class="container section-sm">
-    <div class="section-header">
-      <h2 class="section-title">Shop by Category</h2>
-      <a href="menu.php" class="see-all-link">See All →</a>
-    </div>
-    <div class="categories-grid" id="categories-grid">
-      <?php foreach ($DEMO_CATEGORIES as $cat): ?>
-      <a href="menu.php?category=<?= $cat['id'] ?>" class="category-item">
-        <div class="category-icon"><?= htmlspecialchars($cat['icon']) ?></div>
-        <span class="category-label"><?= htmlspecialchars($cat['name']) ?></span>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </section>
+
 
   <!-- ══ AD BANNER ══ -->
   <section class="container section-sm">

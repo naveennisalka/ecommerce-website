@@ -53,6 +53,19 @@ switch ($action) {
                 'id' => $userId, 'name' => $name,
                 'email' => $email, 'role' => $role, 'phone' => $phone,
             ];
+            
+            // Sync session wishlist to DB
+            $sessionWishlist = $_SESSION['wishlist'] ?? [];
+            if (!empty($sessionWishlist)) {
+                $insStmt = $pdo->prepare("INSERT IGNORE INTO wishlist (user_id, product_id) VALUES (?, ?)");
+                foreach ($sessionWishlist as $pid) {
+                    $insStmt->execute([$userId, $pid]);
+                }
+            }
+            $wStmt = $pdo->prepare("SELECT product_id FROM wishlist WHERE user_id = ?");
+            $wStmt->execute([$userId]);
+            $_SESSION['wishlist'] = $wStmt->fetchAll(PDO::FETCH_COLUMN);
+
             jsonResponse(['success' => true, 'role' => $role, 'name' => $name]);
         } else {
             jsonResponse(['success' => false, 'message' => 'Database not connected. Please set up MySQL.']);
@@ -88,6 +101,19 @@ switch ($action) {
                 'role'  => $user['role'],
                 'phone' => $user['phone'],
             ];
+
+            // Sync session wishlist to DB
+            $sessionWishlist = $_SESSION['wishlist'] ?? [];
+            if (!empty($sessionWishlist)) {
+                $insStmt = $pdo->prepare("INSERT IGNORE INTO wishlist (user_id, product_id) VALUES (?, ?)");
+                foreach ($sessionWishlist as $pid) {
+                    $insStmt->execute([$user['id'], $pid]);
+                }
+            }
+            $wStmt = $pdo->prepare("SELECT product_id FROM wishlist WHERE user_id = ?");
+            $wStmt->execute([$user['id']]);
+            $_SESSION['wishlist'] = $wStmt->fetchAll(PDO::FETCH_COLUMN);
+
             jsonResponse(['success' => true, 'role' => $user['role'], 'name' => $user['name']]);
         } else {
             // Demo login (no DB)

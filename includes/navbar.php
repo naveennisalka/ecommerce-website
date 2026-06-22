@@ -1,5 +1,5 @@
 <?php
-// REUSABLE NAVBAR COMPONENT (NEW DESIGN)
+
 $activePage = $activePage ?? basename($_SERVER['PHP_SELF']);
 $loggedUser = $_SESSION['user'] ?? null;
 
@@ -38,7 +38,7 @@ $wishlistClickAttr = ($isUserDash && $loggedUser && $loggedUser['role'] === 'cus
   
   <!-- LEFT: LOGO -->
   <a href="<?= $basePath ?>index.php" class="nav-logo-new" aria-label="Home">
-    <img src="<?= $basePath ?>images/burger.png" alt="EatLink Logo">
+    <img src="<?= $basePath ?>images/logo.png" alt="EatLink Logo">
   </a>
 
   <div class="nav-center-group">
@@ -53,7 +53,7 @@ $wishlistClickAttr = ($isUserDash && $loggedUser && $loggedUser['role'] === 'cus
 
     <!-- CENTER: SEARCH BAR -->
     <div class="nav-search-container">
-      <input type="text" class="nav-search-input-new" id="nav-search-input" placeholder="Search Foods..." autocomplete="off">
+      <input type="text" class="nav-search-input-new" id="nav-search-input" placeholder="Search Foods..." autocomplete="off" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
       <button class="nav-search-submit-new" id="nav-search-submit" aria-label="Search">
         Search
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

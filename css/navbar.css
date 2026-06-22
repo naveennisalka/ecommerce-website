@@ -37,8 +37,9 @@
   transition: transform 0.2s;
 }
 .nav-logo-new img {
-  width: 50px;
-  height: 50px;
+  height: 45px;
+  width: auto;
+  max-width: 200px;
   object-fit: contain;
 }
 .nav-logo-new:hover {

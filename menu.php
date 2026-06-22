@@ -55,32 +55,18 @@ $brandColors = ['#E8001C','#FFC72C','#E4002B','#FF8800','#009639','#006491'];
   <!-- BODY -->
   <div class="filter-popup-body">
 
-    <!-- ── BRAND ── -->
-    <div class="filter-section">
-      <div class="filter-section-title">Brand</div>
-      <div class="brand-filter-grid">
-        <?php foreach ($DEMO_BRANDS as $i => $brand): ?>
-        <label class="brand-filter-item">
-          <input type="checkbox" class="brand-filter-cb" value="<?= $brand['id'] ?>" id="brand-<?= $brand['id'] ?>">
-          <div class="brand-filter-logo" style="background:<?= $brandColors[$i % count($brandColors)] ?>">
-            <?= htmlspecialchars($brand['icon']) ?>
-          </div>
-          <span class="brand-filter-name"><?= htmlspecialchars($brand['name']) ?></span>
-        </label>
-        <?php endforeach; ?>
-      </div>
-    </div>
+
 
     <!-- ── DELIVERY OPTION ── -->
     <div class="filter-section">
       <div class="filter-section-title">Delivery Option</div>
       <div class="delivery-chips">
         <div class="delivery-chip" data-value="free">
-          <span>🛵</span>
+          <span class="material-symbols-outlined" style="font-size:inherit;">two_wheeler</span>
           <span>Free Delivery</span>
         </div>
         <div class="delivery-chip" data-value="paid">
-          <span>💳</span>
+          <span class="material-symbols-outlined" style="font-size:inherit;">credit_card</span>
           <span>Paid Delivery</span>
         </div>
       </div>
@@ -141,7 +127,7 @@ $brandColors = ['#E8001C','#FFC72C','#E4002B','#FF8800','#009639','#006491'];
         <?php foreach ($DEMO_CATEGORIES as $cat): ?>
         <label class="category-filter-item">
           <input type="checkbox" class="category-filter-cb" value="<?= $cat['id'] ?>" id="cat-<?= $cat['id'] ?>">
-          <span class="cat-emoji"><?= htmlspecialchars($cat['icon']) ?></span>
+          <span class="cat-emoji"><?= $cat['icon'] ?></span>
           <span class="cat-name"><?= htmlspecialchars($cat['name']) ?></span>
           <span class="cat-count"><?= $catCounts[$cat['id']] ?? 0 ?></span>
         </label>
