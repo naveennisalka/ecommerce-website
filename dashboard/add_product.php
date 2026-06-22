@@ -26,6 +26,7 @@ if ($USE_DB) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="../images/logo2.png">
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $editProduct ? 'Edit Product' : 'Add Product' ?> — EatLink</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +41,7 @@ if ($USE_DB) {
 <!-- SIDEBAR -->
 <aside class="dashboard-sidebar" id="dashboard-sidebar">
   <a href="../index.php" class="sidebar-logo">
-    <div class="sidebar-logo-icon">🍔</div>
+    <div class="sidebar-logo-icon"><span class="material-symbols-outlined">lunch_dining</span></div>
     <div class="sidebar-logo-text">Eat<span>Link</span></div>
   </a>
   <div class="sidebar-user">
@@ -52,10 +53,10 @@ if ($USE_DB) {
   </div>
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item" href="shop_owner.php"><span class="sidebar-nav-icon">📊</span> Dashboard</a>
-    <a class="sidebar-nav-item active" href="add_product.php"><span class="sidebar-nav-icon">➕</span> <?= $editProduct?'Edit':'Add' ?> Product</a>
+    <a class="sidebar-nav-item active" href="add_product.php"><span class="sidebar-nav-icon"><span class="material-symbols-outlined">add</span></span> <?= $editProduct?'Edit':'Add' ?> Product</a>
   </nav>
   <div class="sidebar-bottom">
-    <button class="sidebar-logout logout-btn">🚪 Logout</button>
+    <button class="sidebar-logout logout-btn"><span class="material-symbols-outlined">logout</span> Logout</button>
   </div>
 </aside>
 
@@ -78,7 +79,7 @@ if ($USE_DB) {
 
       <!-- BASIC INFO -->
       <div class="form-card">
-        <h3>📋 Basic Information</h3>
+        <h3><span class="material-symbols-outlined">assignment</span> Basic Information</h3>
         <div class="form-grid">
           <div class="dash-form-group form-full">
             <label class="dash-form-label">Product Name *</label>
@@ -190,11 +191,11 @@ document.getElementById('product-form').addEventListener('submit', async functio
   const alert = document.getElementById('auth-alert');
   if (d.success) {
     alert.className = 'auth-alert success';
-    alert.textContent = '✅ '+d.message;
+    alert.textContent = '<span class="material-symbols-outlined">check_circle</span> '+d.message;
     setTimeout(() => window.location.href='shop_owner.php', 1200);
   } else {
     alert.className = 'auth-alert error';
-    alert.textContent = '❌ '+d.message;
+    alert.textContent = '<span class="material-symbols-outlined" style="font-size:inherit; vertical-align:middle;">error</span> '+d.message;
     btn.disabled = false;
     btn.innerHTML = '<?= $editProduct ? '💾 Save Changes' : '+ Add Product' ?>';
   }

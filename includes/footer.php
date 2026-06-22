@@ -7,8 +7,7 @@
       <!-- Brand Section -->
       <div class="footer-brand">
         <div class="footer-logo">
-          <span class="logo-icon">🍔</span>
-          <span class="logo-text">EatLink</span>
+          <img src="images/Logo.png" alt="EatLink Logo" style="max-height: 40px;">
         </div>
         <p class="footer-description">
           Savor the moments. Order your favorite meals from top-rated restaurants and local brands, delivered hot and fresh right to your doorstep.
@@ -46,19 +45,19 @@
           <h5 class="footer-heading">Contact Us</h5>
           <ul class="footer-contact">
             <li class="contact-item">
-              <span class="contact-icon">📍</span>
+              <span class="contact-icon material-symbols-outlined" style="font-size:1.1rem; vertical-align:middle;">location_on</span>
               <span>45 Galle Road, Colombo 03, Sri Lanka</span>
             </li>
             <li class="contact-item">
-              <span class="contact-icon">📞</span>
+              <span class="contact-icon material-symbols-outlined" style="font-size:1.1rem; vertical-align:middle;">call</span>
               <span>+94 11 234 5678</span>
             </li>
             <li class="contact-item">
-              <span class="contact-icon">✉️</span>
+              <span class="contact-icon material-symbols-outlined" style="font-size:1.1rem; vertical-align:middle;">mail</span>
               <span>info@eatlink.com</span>
             </li>
             <li class="contact-item">
-              <span class="contact-icon">🕐</span>
+              <span class="contact-icon material-symbols-outlined" style="font-size:1.1rem; vertical-align:middle;">schedule</span>
               <span>Daily: 8:00 AM - 11:00 PM</span>
             </li>
           </ul>

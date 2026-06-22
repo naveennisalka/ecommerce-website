@@ -10,6 +10,7 @@ if (!empty($_SESSION['user'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="images/logo2.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login — EatLink</title>
@@ -40,15 +41,15 @@ if (!empty($_SESSION['user'])) {
   <!-- ROLE TABS -->
   <div class="role-tabs" role="tablist" aria-label="Select your role">
     <button class="role-tab active" data-role="customer" type="button" role="tab">
-      <span class="role-icon">👤</span>
+      <span class="role-icon"><span class="material-symbols-outlined">person</span></span>
       <span class="role-label">Customer</span>
     </button>
     <button class="role-tab" data-role="shop_owner" type="button" role="tab">
-      <span class="role-icon">🏪</span>
+      <span class="role-icon"><span class="material-symbols-outlined">storefront</span></span>
       <span class="role-label">Shop Owner</span>
     </button>
     <button class="role-tab" data-role="delivery_man" type="button" role="tab">
-      <span class="role-icon">🛵</span>
+      <span class="role-icon"><span class="material-symbols-outlined">two_wheeler</span></span>
       <span class="role-label">Delivery Man</span>
     </button>
   </div>

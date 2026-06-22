@@ -23,7 +23,7 @@
           if (data.wishlisted) {
             btn.classList.add('wishlisted');
             window._wishlistIds.add(String(productId));
-            window.showToast && showToast('Added to wishlist ❤️', 'info');
+            window.showToast && showToast('Added to wishlist <span class="material-symbols-outlined">favorite</span>', 'info');
           } else {
             btn.classList.remove('wishlisted');
             window._wishlistIds.delete(String(productId));
