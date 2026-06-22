@@ -15,9 +15,17 @@ switch ($action) {
             if ($key !== false) {
                 array_splice($_SESSION['wishlist'], $key, 1);
                 $wishlisted = false;
+                if (!empty($GLOBALS['USE_DB']) && !empty($_SESSION['user']['id'])) {
+                    $stmt = $pdo->prepare("DELETE FROM wishlist WHERE user_id = ? AND product_id = ?");
+                    $stmt->execute([$_SESSION['user']['id'], $pid]);
+                }
             } else {
                 $_SESSION['wishlist'][] = $pid;
                 $wishlisted = true;
+                if (!empty($GLOBALS['USE_DB']) && !empty($_SESSION['user']['id'])) {
+                    $stmt = $pdo->prepare("INSERT IGNORE INTO wishlist (user_id, product_id) VALUES (?, ?)");
+                    $stmt->execute([$_SESSION['user']['id'], $pid]);
+                }
             }
             echo json_encode(['success' => true, 'wishlisted' => $wishlisted, 'count' => count($_SESSION['wishlist'])]);
         } else {

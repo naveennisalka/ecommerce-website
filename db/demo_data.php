@@ -2,23 +2,23 @@
 // Demo data used when database is not available
 
 $DEMO_BRANDS = [
-    ['id' => 1, 'name' => 'Pizza Hut', 'color' => '#E8001C', 'icon' => '🍕'],
-    ['id' => 2, 'name' => 'McDonald\'s', 'color' => '#FFC72C', 'icon' => 'M'],
-    ['id' => 3, 'name' => 'KFC', 'color' => '#E4002B', 'icon' => '🍗'],
-    ['id' => 4, 'name' => 'Burger King', 'color' => '#FF8800', 'icon' => '🍔'],
-    ['id' => 5, 'name' => 'Subway', 'color' => '#009639', 'icon' => '🥪'],
-    ['id' => 6, 'name' => 'Domino\'s', 'color' => '#006491', 'icon' => '🍕'],
+    ['id' => 1, 'name' => 'Pizza Hut', 'color' => '#E8001C', 'icon' => '<span class="material-symbols-outlined">local_pizza</span>'],
+    ['id' => 2, 'name' => 'McDonald\'s', 'color' => '#FFC72C', 'icon' => '<span class="material-symbols-outlined">fastfood</span>'],
+    ['id' => 3, 'name' => 'KFC', 'color' => '#E4002B', 'icon' => '<span class="material-symbols-outlined">set_meal</span>'],
+    ['id' => 4, 'name' => 'Burger King', 'color' => '#FF8800', 'icon' => '<span class="material-symbols-outlined">lunch_dining</span>'],
+    ['id' => 5, 'name' => 'Subway', 'color' => '#009639', 'icon' => '<span class="material-symbols-outlined">breakfast_dining</span>'],
+    ['id' => 6, 'name' => 'Domino\'s', 'color' => '#006491', 'icon' => '<span class="material-symbols-outlined">local_pizza</span>'],
 ];
 
 $DEMO_CATEGORIES = [
-    ['id' => 1, 'name' => 'Burgers', 'icon' => '🍔'],
-    ['id' => 2, 'name' => 'Pizza', 'icon' => '🍕'],
-    ['id' => 3, 'name' => 'Chicken', 'icon' => '🍗'],
-    ['id' => 4, 'name' => 'Sandwiches', 'icon' => '🥪'],
-    ['id' => 5, 'name' => 'Desserts', 'icon' => '🍰'],
-    ['id' => 6, 'name' => 'Drinks', 'icon' => '🥤'],
-    ['id' => 7, 'name' => 'Sides', 'icon' => '🍟'],
-    ['id' => 8, 'name' => 'Salads', 'icon' => '🥗'],
+    ['id' => 1, 'name' => 'Burgers', 'icon' => '<span class="material-symbols-outlined">lunch_dining</span>'],
+    ['id' => 2, 'name' => 'Pizza', 'icon' => '<span class="material-symbols-outlined">local_pizza</span>'],
+    ['id' => 3, 'name' => 'Chicken', 'icon' => '<span class="material-symbols-outlined">set_meal</span>'],
+    ['id' => 4, 'name' => 'Sandwiches', 'icon' => '<span class="material-symbols-outlined">breakfast_dining</span>'],
+    ['id' => 5, 'name' => 'Desserts', 'icon' => '<span class="material-symbols-outlined">cake</span>'],
+    ['id' => 6, 'name' => 'Drinks', 'icon' => '<span class="material-symbols-outlined">local_drink</span>'],
+    ['id' => 7, 'name' => 'Sides', 'icon' => '<span class="material-symbols-outlined">tapas</span>'],
+    ['id' => 8, 'name' => 'Salads', 'icon' => '<span class="material-symbols-outlined">eco</span>'],
 ];
 
 function buildProducts() {

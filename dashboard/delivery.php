@@ -50,9 +50,8 @@ if ($USE_DB) {
 <div class="dashboard-wrapper">
 <!-- SIDEBAR -->
 <aside class="dashboard-sidebar" id="dashboard-sidebar">
-  <a href="../index.php" class="sidebar-logo">
-    <div class="sidebar-logo-icon">🍔</div>
-    <div class="sidebar-logo-text">Eat<span>Link</span></div>
+  <a href="../index.php" class="sidebar-logo" style="display:flex;align-items:center;padding:16px 24px;">
+    <img src="../images/Logo.png" alt="EatLink Logo" style="max-height: 40px; max-width: 100%;">
   </a>
   <div class="sidebar-user">
     <div class="sidebar-avatar"><?= strtoupper(substr($user['name'],0,1)) ?></div>

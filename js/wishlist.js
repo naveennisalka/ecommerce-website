@@ -5,6 +5,8 @@
 (function () {
   'use strict';
 
+  const apiBase = window.location.pathname.includes('/dashboard/') ? '../api/' : 'api/';
+
   // Track locally in a Set
   window._wishlistIds = new Set();
 
@@ -14,7 +16,7 @@
     formData.append('action', 'toggle');
     formData.append('product_id', productId);
 
-    fetch('api/wishlist.php', { method: 'POST', body: formData })
+    fetch(apiBase + 'wishlist.php', { method: 'POST', body: formData })
       .then(r => r.json())
       .then(data => {
         if (data.success) {
@@ -43,7 +45,7 @@
   });
 
   // ── LOAD INITIAL WISHLIST STATE ──
-  fetch('api/wishlist.php')
+  fetch(apiBase + 'wishlist.php')
     .then(r => r.json())
     .then(data => {
       if (data.success && data.ids) {

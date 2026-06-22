@@ -72,14 +72,14 @@ function renderCard($p, $wishlist=[]): string {
     if (($p['discount_percent']??0) > 0) $disc = '<div class="product-label"><span class="discount-label">'.$p['discount_percent'].'% OFF</span></div>';
     elseif (!empty($p['is_new']))         $disc = '<div class="product-label"><span class="new-label">NEW</span></div>';
     $orig = !empty($p['original_price']) ? '<span class="price-original">Rs. '.number_format($p['original_price']).'</span>' : '';
-    return '<div class="product-card" data-product-id="'.$p['id'].'" data-product-name="'.htmlspecialchars($p['name']).'" onclick="window.location=\'product.php?id='.$p['id'].'\'">
+    return '<div class="product-card" data-product-id="'.$p['id'].'" data-product-name="'.htmlspecialchars($p['name']).'" onclick="if(!event.target.closest(\'.product-heart, .add-to-cart-btn\')) window.location=\'product.php?id='.$p['id'].'\'">
       <div class="product-card-image-wrap">
         '.$disc.'
-        <button class="product-heart '.$wishlisted.'" data-product-id="'.$p['id'].'" title="Wishlist" aria-label="Wishlist" onclick="event.stopPropagation()">
+        <button class="product-heart '.$wishlisted.'" data-product-id="'.$p['id'].'" title="Wishlist" aria-label="Wishlist">
           <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
         <img src="'.$img.'" alt="'.htmlspecialchars($p['name']).'" loading="lazy">
-        <button class="add-to-cart-btn" title="Add to cart" aria-label="Add to cart" onclick="event.stopPropagation()">
+        <button class="add-to-cart-btn" title="Add to cart" aria-label="Add to cart">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6" stroke="#fff" stroke-width="1.5"/><path d="M16 10a4 4 0 01-8 0" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
         </button>
       </div>

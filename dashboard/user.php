@@ -53,6 +53,7 @@ if ($USE_DB) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body class="dashboard-body">
@@ -62,9 +63,8 @@ if ($USE_DB) {
 
 <!-- SIDEBAR -->
 <aside class="dashboard-sidebar" id="dashboard-sidebar">
-  <a href="../index.php" class="sidebar-logo">
-    <div class="sidebar-logo-icon">🍔</div>
-    <div class="sidebar-logo-text">Eat<span>Link</span></div>
+  <a href="../index.php" class="sidebar-logo" style="display:flex;align-items:center;padding:16px 24px;">
+    <img src="../images/Logo.png" alt="EatLink Logo" style="max-height: 40px; max-width: 100%;">
   </a>
   <div class="sidebar-user">
     <div class="sidebar-avatar"><?= strtoupper(substr($user['name'],0,1)) ?></div>
@@ -92,10 +92,6 @@ if ($USE_DB) {
         <span class="sidebar-nav-icon">🔔</span> Notifications
         <?php if ($unread): ?><span class="sidebar-badge" id="notif-sidebar-badge"><?= $unread ?></span><?php endif; ?>
       </a>
-    </div>
-    <div class="sidebar-nav-section">
-      <a class="sidebar-nav-item" href="../index.php"><span class="sidebar-nav-icon">🏠</span> Home</a>
-      <a class="sidebar-nav-item" href="../menu.php"><span class="sidebar-nav-icon">🍽️</span> Browse Menu</a>
     </div>
   </nav>
   <div class="sidebar-bottom">
@@ -188,14 +184,14 @@ if ($USE_DB) {
           $img = ($wi['image']??'burger')==='pizza'?'../images/pizza.png':'../images/burger.png';
           $disc = $wi['discount_percent']>0 ? '<div class="product-label"><span class="discount-label">'.$wi['discount_percent'].'% OFF</span></div>' : ($wi['is_new']?'<div class="product-label"><span class="new-label">NEW</span></div>':'');
       ?>
-      <div class="product-card" data-product-id="<?= $wi['product_id'] ?>" data-product-name="<?= htmlspecialchars($wi['name']) ?>" onclick="window.location='../product.php?id=<?= $wi['product_id'] ?>'">
+      <div class="product-card" data-product-id="<?= $wi['product_id'] ?>" data-product-name="<?= htmlspecialchars($wi['name']) ?>" onclick="if(!event.target.closest('.product-heart, .add-to-cart-btn')) window.location='../product.php?id=<?= $wi['product_id'] ?>'">
         <div class="product-card-image-wrap">
           <?= $disc ?>
-          <button class="product-heart wishlisted" data-product-id="<?= $wi['product_id'] ?>" onclick="event.stopPropagation()">
+          <button class="product-heart wishlisted" data-product-id="<?= $wi['product_id'] ?>">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
           <img src="<?= $img ?>" alt="<?= htmlspecialchars($wi['name']) ?>">
-          <button class="add-to-cart-btn" onclick="event.stopPropagation()">
+          <button class="add-to-cart-btn">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6" stroke="#fff" stroke-width="1.5"/><path d="M16 10a4 4 0 01-8 0" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
           </button>
         </div>

@@ -5,6 +5,8 @@
 (function () {
   'use strict';
 
+  const apiBase = window.location.pathname.includes('/dashboard/') ? '../api/' : 'api/';
+
   // ── SHOW TOAST ──
   window.showToast = function(msg, type = 'info') {
     let container = document.getElementById('toast-container');
@@ -36,7 +38,7 @@
     formData.append('product_id', productId);
     formData.append('quantity', 1);
 
-    fetch('api/cart.php', { method: 'POST', body: formData })
+    fetch(apiBase + 'cart.php', { method: 'POST', body: formData })
       .then(r => r.json())
       .then(data => {
         if (data.success) {
