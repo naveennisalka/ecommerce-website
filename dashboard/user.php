@@ -328,6 +328,11 @@ async function checkout() {
   const or=await fetch('../api/orders.php',{method:'POST',body:fd});
   const od=await or.json();
   if(od.success){
+    // Explicitly clear the cart upon checkout
+    const clrFd = new FormData();
+    clrFd.append('action', 'clear');
+    await fetch('../api/cart.php', { method: 'POST', body: clrFd });
+
     showToast('Order #'+od.order_id+' placed!','success');
     setTimeout(()=>location.reload(),1500);
   } else {
