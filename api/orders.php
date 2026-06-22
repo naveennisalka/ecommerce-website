@@ -29,10 +29,17 @@ switch ($action) {
         foreach ($items as $item) {
             $pid = (int)$item['product_id'];
             $qty = max(1,(int)$item['quantity']);
-            $p = $pdo->prepare("SELECT id,shop_id,name,price FROM products WHERE id=? AND is_active=1");
+            $p = $pdo->prepare("SELECT id,shop_id,name,price,stock FROM products WHERE id=? AND is_active=1");
             $p->execute([$pid]);
             $prod = $p->fetch();
             if (!$prod) continue;
+
+            // Check if requested quantity exceeds available stock
+            if ($qty > $prod['stock']) {
+                $left = $prod['stock'] > 0 ? "Only {$prod['stock']} left" : "Out of stock";
+                jsonResponse(['success'=>false,'message'=>"Sorry, '{$prod['name']}' is out of stock ({$left})."]);
+            }
+
             if (!$shopId) $shopId = $prod['shop_id'];
             $total += $prod['price'] * $qty;
             $verified[] = array_merge($prod, ['quantity'=>$qty]);
